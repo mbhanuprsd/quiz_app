@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
@@ -12,15 +13,45 @@
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <link rel="shortcut icon" type="image/png" href="favicon.png" />
 
   <title>quiz_app</title>
   <link rel="manifest" href="manifest.json">
 </head>
+
 <body>
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
+  <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+
+  <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-analytics.js"></script>
+
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyDUy5fyqCb2F2vzJhwYBKbvfHh6pKO_q9k",
+      authDomain: "quizapp-b1d6e.firebaseapp.com",
+      databaseURL: "https://quizapp-b1d6e.firebaseio.com",
+      projectId: "quizapp-b1d6e",
+      storageBucket: "quizapp-b1d6e.appspot.com",
+      messagingSenderId: "947625775923",
+      appId: "1:947625775923:web:21bf36cc28e453ff7ae446",
+      measurementId: "G-FX359CQRY0"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
+
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
@@ -30,4 +61,5 @@
   </script>
   <script src="main.dart.js" type="application/javascript"></script>
 </body>
+
 </html>

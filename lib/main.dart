@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz_app/page_login.dart';
@@ -16,16 +15,18 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: SplashPage(),
       routes: <String, WidgetBuilder>{
+        "/home": (BuildContext context) => new MainPage(),
         "/questions": (BuildContext context) => new QuestionsPage(),
-        "/work": (BuildContext context) => new QuestionsPage(),
-        "/leaves": (BuildContext context) => new QuestionsPage(),
+        "/page1": (BuildContext context) => new QuestionsPage(),
+        "/page2": (BuildContext context) => new QuestionsPage(),
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          primarySwatch: Colors.amber,
-          primaryColor: defaultTargetPlatform == TargetPlatform.iOS
-              ? Colors.grey[50]
-              : null),
+        primarySwatch: Colors.amber,
+        primaryColor: defaultTargetPlatform == TargetPlatform.iOS
+            ? Colors.grey[50]
+            : null,
+      ),
     );
   }
 }
@@ -41,17 +42,12 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     Timer(
         Duration(seconds: 2),
-        () async => {
-              if (await FirebaseAuth.instance.currentUser() == null)
-                {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (BuildContext context) => LoginPage()))
-                }
-              else
-                {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (BuildContext context) => MainPage()))
-                }
+        () => {
+              Utils.isLoggedIn().then((loggedIn) => {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            loggedIn ? MainPage() : LoginPage()))
+                  })
             });
   }
 
